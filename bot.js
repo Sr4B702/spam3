@@ -66,27 +66,6 @@ client.on('message', message => {
   let args = message.content.split(" ").slice(1);
 
 
-
-client.on("message",async msg => {
-    if(msg.content.startsWith(prefix + "say")){
-        let args = '';
-        let fltr = m => m.author.id === msg.author.id
-        await msg.reply("**اكتب شي لجعلي اكتب شيئ الان**").then(p =>{
-            p.delete(2222)
-        })
-        msg.channel.awaitMessages(fltr, {
-time: 60000,
-max: 1
-        })
-        .then(sy => {
-            args = sy.first().content
-            sy.first().delete();
-            msg.delete(2222);
-            msg.channel.send(args)
-        })
-    }
-})
-
 client2.on('message', message => {
     if(message.content === prefix+'راتب'){
         message.channel.send('#daily')
@@ -119,27 +98,18 @@ if (message.content === prefix+'spam') {
       }
 });
 
-client2.on("message",async msg => {
-    if(msg.content.startsWith(prefix + "say")){
-        if(msg.author.id !== '552647908478943243') return;
-        let args = '';
-        let fltr = m => m.author.id === msg.author.id
-        await msg.reply("**اكتب شي لجعلي اكتب شيئ الان**").then(p =>{
-            p.delete(2222)
-        })
-        msg.channel.awaitMessages(fltr, {
-time: 60000,
-max: 1
-        })
-        .then(sy => {
-            args = sy.first().content
-            sy.first().delete();
-            msg.delete(2222);
-            msg.channel.send(args)
-        })
-    }
+client.on('message', msg =>{
+        let args = msg.content.slice(4);
+  if (msg.content.startsWith('-say')) {
+   msg.channel.send(args)   
+  }
 })
-
+client2.on('message', msg =>{
+        let args = msg.content.slice(4);
+  if (msg.content.startsWith('-say')) {
+   msg.channel.send(args)   
+  }
+})
 
 client.login(process.env.TOKEN);
 client2.login(process.env.TOKEN2);
